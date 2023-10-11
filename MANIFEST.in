@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include appointedd_integration *.css
+recursive-include appointedd_integration *.csv
+recursive-include appointedd_integration *.html
+recursive-include appointedd_integration *.ico
+recursive-include appointedd_integration *.js
+recursive-include appointedd_integration *.json
+recursive-include appointedd_integration *.md
+recursive-include appointedd_integration *.png
+recursive-include appointedd_integration *.py
+recursive-include appointedd_integration *.svg
+recursive-include appointedd_integration *.txt
+recursive-exclude appointedd_integration *.pyc
