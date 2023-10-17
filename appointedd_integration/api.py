@@ -11,7 +11,7 @@ def get_appointedd_api_key():
 	api_key = get_password("Appointedd Integration Settings", "Appointedd Integration Settings", "api_key")
 	return api_key
 
-@frappe.whitelist()
+@frappe.whitelist(allow_guest=False, methods=["GET"])
 def get_appointedd_service_categories():
 	try:
 		api_key = get_appointedd_api_key()
@@ -30,7 +30,7 @@ def get_appointedd_service_categories():
 	except Exception as error:
 		frappe.log_error("Get Appointedd Service Categories Error", str(error))
 
-@frappe.whitelist()
+@frappe.whitelist(allow_guest=False, methods=["GET"])
 def get_appointedd_services():
 	try:
 		api_key = get_appointedd_api_key()
@@ -49,7 +49,7 @@ def get_appointedd_services():
 	except Exception as error:
 		frappe.log_error("Get Appointedd Services Error", str(error))
 
-@frappe.whitelist()
+@frappe.whitelist(allow_guest=False, methods=["GET"])
 def get_appointedd_resources_groups():
 	try:
 		api_key = get_appointedd_api_key()
@@ -68,7 +68,7 @@ def get_appointedd_resources_groups():
 	except Exception as error:
 		frappe.log_error("Get Appointedd Resource Groups Error", str(error))
 
-@frappe.whitelist()
+@frappe.whitelist(allow_guest=False, methods=["GET"])
 def get_appointedd_resources():
 	try:
 		api_key = get_appointedd_api_key()
@@ -87,7 +87,7 @@ def get_appointedd_resources():
 	except Exception as error:
 		frappe.log_error("Get Appointedd Resources Error", str(error))
 
-@frappe.whitelist()
+@frappe.whitelist(allow_guest=False, methods=["GET"])
 def get_appointedd_bookings():
 	try:
 		api_key = get_appointedd_api_key()
@@ -239,42 +239,23 @@ def create_customer(customer_data):
 
 	return customer_doc
 
-@frappe.whitelist()
-def update_appointedd_bookings(booking_id = "65279e22615c41000eee7974", start = "13-10-2023 12:15:00", end = "13-10-2023 12:45:00"):
-	time_zone = frappe.defaults.get_defaults().get("time_zone")
+@frappe.whitelist(allow_guest=False, methods=["POST"])
+def cancel_appointedd_booking(booking_id = None):
 	try:
-		parsed_start_datetime = datetime.strptime(start, "%d-%m-%Y %H:%M:%S")
-		iso_start_format = parsed_start_datetime.isoformat()
-		return(iso_start_format)
-		# api_key = get_appointedd_api_key()
-		# url = "https://api.appointedd.com/v1/bookings/".format(booking_id)
+		api_key = get_appointedd_api_key()
+		url = "https://api.appointedd.com/v1/bookings/{}/cancel".format(booking_id)
 
-		# payload = json.dumps({
-		# 	"ignore_service_assignment": False,
-		# 	"ignore_service_schedule": False,
-		# 	"send_notifications": True,
-		# 	"data": {
-		# 		"modified_source": "api",
-		# 		"parts": [
-		# 			{
-		# 				"start": "2023-10-13T12:30:00.000+05:30",
-		# 				"end": "2023-10-13T13:00:00.000+05:30"
-		# 			}
-		# 		]
-		# 	},
-		# 	"timezone": time_zone
-		# })
+		payload = { "source": "api" }
 
-		# headers = {
-		# 	'X-API-KEY': str(api_key),
-		# 	'Accept': 'application/json',
-		# 	'Content-Type': 'application/json'
-		# }
+		headers = {
+			'X-API-KEY': str(api_key),
+			'Accept': 'application/json'
+		}
 
-		# response = requests.request("PUT", url, headers=headers, data=payload)
+		response = requests.request("POST", url, headers=headers, json=payload)
 
-		# bookings = json.loads(response.text)
-		# insert_appointedd_bookings(bookings)
+		booking_response = json.loads(response.text)
+		return booking_response
 
 	except Exception as error:
-		frappe.log_error("Get Appointedd Bookings Error", str(error))
+		frappe.log_error("Cancel Appointedd Bookings Error", str(error))

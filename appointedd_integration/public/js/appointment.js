@@ -3,18 +3,22 @@
 
 frappe.ui.form.on('Appointment', {
 	refresh: function (frm) {
-		frm.add_custom_button(__("Update Appointment"), function () {
+		frm.add_custom_button(__("Cancel Appointment"), function () {
 			frappe.call({
-				method: "appointedd_integration.api.update_appointedd_bookings",
+				method: "appointedd_integration.api.cancel_appointedd_booking",
 				args : {
-					'booking_id' : frm.doc.appointment_id,
-					'start' : frm.doc.scheduled_time,
-					'end' : frm.doc.end_time
+					'booking_id' : frm.doc.appointment_id
 				},
 				freeze: true,
-				freeze_message: __("Updating Booking......"),
+				freeze_message: __("Cancelling Booking......"),
 				callback (r) {
-					console.log(r.message)
+					if(r.message){
+						frappe.throw(r.message.message)
+					}
+					else{
+						frm.set_value('status', "Closed");
+						frm.save();
+					}
 				}
 			});
 		});
