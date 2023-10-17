@@ -1,0 +1,150 @@
+{
+ "actions": [],
+ "autoname": "field:appointedd_resource",
+ "creation": "2023-10-11 17:03:05.108175",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "profile_details_section",
+  "appointedd_resource",
+  "appointedd_resource_id",
+  "column_break_78qiw",
+  "email",
+  "phone",
+  "address_details_section",
+  "house_no",
+  "address_1",
+  "address_2",
+  "column_break_yq3eg",
+  "city",
+  "postcode",
+  "section_break_pypcw",
+  "appointedd_resource_services",
+  "column_break_pkrrk",
+  "appointedd_resource_groups_table"
+ ],
+ "fields": [
+  {
+   "fieldname": "appointedd_resource",
+   "fieldtype": "Data",
+   "label": "Appointedd Resource",
+   "unique": 1
+  },
+  {
+   "fieldname": "appointedd_resource_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Appointedd Resource ID",
+   "read_only": 1
+  },
+  {
+   "fieldname": "profile_details_section",
+   "fieldtype": "Section Break",
+   "label": "Profile Details"
+  },
+  {
+   "fieldname": "column_break_78qiw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email",
+   "options": "Email",
+   "read_only": 1
+  },
+  {
+   "fieldname": "phone",
+   "fieldtype": "Data",
+   "label": "Phone",
+   "options": "Phone",
+   "read_only": 1
+  },
+  {
+   "fieldname": "address_details_section",
+   "fieldtype": "Section Break",
+   "label": "Address Details"
+  },
+  {
+   "fieldname": "house_no",
+   "fieldtype": "Data",
+   "label": "House No",
+   "read_only": 1
+  },
+  {
+   "fieldname": "address_1",
+   "fieldtype": "Data",
+   "label": "Address Line 1",
+   "read_only": 1
+  },
+  {
+   "fieldname": "address_2",
+   "fieldtype": "Data",
+   "label": "Address Line 2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_yq3eg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "city",
+   "fieldtype": "Data",
+   "label": "City",
+   "read_only": 1
+  },
+  {
+   "fieldname": "postcode",
+   "fieldtype": "Data",
+   "label": "Postal Code",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_pypcw",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "appointedd_resource_services",
+   "fieldtype": "Table MultiSelect",
+   "label": "Resource Services",
+   "options": "Appointedd Resource Services"
+  },
+  {
+   "fieldname": "column_break_pkrrk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "appointedd_resource_groups_table",
+   "fieldtype": "Table MultiSelect",
+   "label": "Resource Groups",
+   "options": "Appointedd Resource Groups Table"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-10-11 22:02:04.275601",
+ "modified_by": "Administrator",
+ "module": "Appointedd Integration",
+ "name": "Appointedd Resource",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,53 @@
+{
+ "actions": [],
+ "autoname": "field:appointedd_service_category",
+ "creation": "2023-10-11 16:59:11.769815",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "appointedd_service_category",
+  "appointedd_service_category_id"
+ ],
+ "fields": [
+  {
+   "fieldname": "appointedd_service_category",
+   "fieldtype": "Data",
+   "label": "Appointedd Service Category",
+   "unique": 1
+  },
+  {
+   "fieldname": "appointedd_service_category_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Appointedd Service Category ID",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-10-11 18:56:58.559915",
+ "modified_by": "Administrator",
+ "module": "Appointedd Integration",
+ "name": "Appointedd Service Category",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

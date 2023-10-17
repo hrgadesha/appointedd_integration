@@ -1,0 +1,92 @@
+{
+ "actions": [],
+ "creation": "2023-10-11 14:49:52.642495",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "enable",
+  "configuration_section",
+  "api_key",
+  "sync_appointedd_data_section",
+  "sync_appointedd_service_categories",
+  "sync_appointedd_services",
+  "column_break_w0pbu",
+  "sync_appointedd_resource_groups",
+  "sync_appointedd_resource"
+ ],
+ "fields": [
+  {
+   "fieldname": "api_key",
+   "fieldtype": "Password",
+   "label": "API key",
+   "mandatory_depends_on": "eval:doc.enable"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable",
+   "fieldtype": "Check",
+   "label": "Enable"
+  },
+  {
+   "depends_on": "eval:doc.enable",
+   "fieldname": "configuration_section",
+   "fieldtype": "Section Break",
+   "label": "Configuration"
+  },
+  {
+   "fieldname": "column_break_w0pbu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.api_key",
+   "fieldname": "sync_appointedd_data_section",
+   "fieldtype": "Section Break",
+   "label": "Sync Appointedd Data"
+  },
+  {
+   "fieldname": "sync_appointedd_services",
+   "fieldtype": "Button",
+   "label": "Sync Appointedd Services"
+  },
+  {
+   "fieldname": "sync_appointedd_service_categories",
+   "fieldtype": "Button",
+   "label": "Sync Appointedd Service Categories"
+  },
+  {
+   "fieldname": "sync_appointedd_resource_groups",
+   "fieldtype": "Button",
+   "label": "Sync Appointedd Resource Groups"
+  },
+  {
+   "fieldname": "sync_appointedd_resource",
+   "fieldtype": "Button",
+   "label": "Sync Appointedd Resource"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2023-10-11 21:13:56.982748",
+ "modified_by": "Administrator",
+ "module": "Appointedd Integration",
+ "name": "Appointedd Integration Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

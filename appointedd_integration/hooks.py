@@ -29,7 +29,9 @@ app_license = "MIT"
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
+doctype_js = {
+    "Appointment" : "public/js/appointment.js"
+}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -113,23 +115,13 @@ app_license = "MIT"
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
-#	"all": [
-#		"appointedd_integration.tasks.all"
-#	],
-#	"daily": [
-#		"appointedd_integration.tasks.daily"
-#	],
-#	"hourly": [
-#		"appointedd_integration.tasks.hourly"
-#	],
-#	"weekly": [
-#		"appointedd_integration.tasks.weekly"
-#	],
-#	"monthly": [
-#		"appointedd_integration.tasks.monthly"
-#	],
-# }
+scheduler_events = {
+    "cron": {
+        "*/15 * * * *": [
+            "appointedd_integration.api.get_appointedd_bookings"
+        ]
+    }
+}
 
 # Testing
 # -------

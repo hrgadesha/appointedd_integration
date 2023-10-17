@@ -1,0 +1,98 @@
+{
+ "actions": [],
+ "autoname": "field:appointedd_service",
+ "creation": "2023-10-11 16:56:45.473684",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "appointedd_service_category",
+  "appointedd_service",
+  "appointedd_service_id",
+  "column_break_nirh2",
+  "description",
+  "booking_information_section",
+  "booking_type",
+  "column_break_cl3ol",
+  "appointedd_service_table"
+ ],
+ "fields": [
+  {
+   "fieldname": "appointedd_service",
+   "fieldtype": "Data",
+   "label": "Appointedd Service",
+   "unique": 1
+  },
+  {
+   "fieldname": "appointedd_service_category",
+   "fieldtype": "Link",
+   "label": "Appointedd Service Category",
+   "options": "Appointedd Service Category",
+   "read_only": 1
+  },
+  {
+   "fieldname": "appointedd_service_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Appointedd Service ID",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_nirh2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Long Text",
+   "label": "Description",
+   "read_only": 1
+  },
+  {
+   "fieldname": "booking_information_section",
+   "fieldtype": "Section Break",
+   "label": "Booking Information"
+  },
+  {
+   "fieldname": "booking_type",
+   "fieldtype": "Data",
+   "label": "Booking Type",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_cl3ol",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "appointedd_service_table",
+   "fieldtype": "Table",
+   "label": "Duration",
+   "options": "Appointedd Service Table"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-10-11 20:40:46.908374",
+ "modified_by": "Administrator",
+ "module": "Appointedd Integration",
+ "name": "Appointedd Service",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,39 @@
+{
+ "actions": [],
+ "creation": "2023-10-11 21:35:13.367081",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "appointedd_resource_group",
+  "appointedd_resource_group_id"
+ ],
+ "fields": [
+  {
+   "fieldname": "appointedd_resource_group",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Appointedd Resource Group",
+   "options": "Appointedd Resource Groups"
+  },
+  {
+   "fieldname": "appointedd_resource_group_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Appointedd Resource Group ID",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-10-11 21:39:47.953788",
+ "modified_by": "Administrator",
+ "module": "Appointedd Integration",
+ "name": "Appointedd Resource Groups Table",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
