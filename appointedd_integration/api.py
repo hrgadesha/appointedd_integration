@@ -11,7 +11,7 @@ def get_appointedd_api_key():
 	api_key = get_password("Appointedd Integration Settings", "Appointedd Integration Settings", "api_key")
 	return api_key
 
-@frappe.whitelist(allow_guest=False, methods=["GET"])
+@frappe.whitelist(allow_guest=False)
 def get_appointedd_service_categories():
 	try:
 		api_key = get_appointedd_api_key()
@@ -30,7 +30,7 @@ def get_appointedd_service_categories():
 	except Exception as error:
 		frappe.log_error("Get Appointedd Service Categories Error", str(error))
 
-@frappe.whitelist(allow_guest=False, methods=["GET"])
+@frappe.whitelist(allow_guest=False)
 def get_appointedd_services():
 	try:
 		api_key = get_appointedd_api_key()
@@ -49,7 +49,7 @@ def get_appointedd_services():
 	except Exception as error:
 		frappe.log_error("Get Appointedd Services Error", str(error))
 
-@frappe.whitelist(allow_guest=False, methods=["GET"])
+@frappe.whitelist(allow_guest=False)
 def get_appointedd_resources_groups():
 	try:
 		api_key = get_appointedd_api_key()
@@ -68,7 +68,7 @@ def get_appointedd_resources_groups():
 	except Exception as error:
 		frappe.log_error("Get Appointedd Resource Groups Error", str(error))
 
-@frappe.whitelist(allow_guest=False, methods=["GET"])
+@frappe.whitelist(allow_guest=False)
 def get_appointedd_resources():
 	try:
 		api_key = get_appointedd_api_key()
@@ -87,7 +87,7 @@ def get_appointedd_resources():
 	except Exception as error:
 		frappe.log_error("Get Appointedd Resources Error", str(error))
 
-@frappe.whitelist(allow_guest=False, methods=["GET"])
+@frappe.whitelist(allow_guest=False)
 def get_appointedd_bookings():
 	try:
 		api_key = get_appointedd_api_key()
@@ -114,7 +114,7 @@ def insert_appointedd_categories(categories):
 			service_category.appointedd_service_category_id = cat.get("id")
 			service_category.flags.ignore_permissions = True
 			service_category.flags.ignore_mandatory = True
-			service_category.insert()
+			service_category.save()
 
 def insert_appointedd_services(services):
 	for service in services.get("data"):
@@ -129,7 +129,7 @@ def insert_appointedd_services(services):
 			service_doc.set("appointedd_service_table", service.get("booking")["durations"])
 			service_doc.flags.ignore_permissions = True
 			service_doc.flags.ignore_mandatory = True
-			service_doc.insert()
+			service_doc.save()
 
 def insert_appointedd_resource_groups(resource_groups):
 	for res_group in resource_groups.get("data"):
@@ -139,33 +139,37 @@ def insert_appointedd_resource_groups(resource_groups):
 			res_group_doc.appointedd_resource_group_id = res_group.get("id")
 			res_group_doc.flags.ignore_permissions = True
 			res_group_doc.flags.ignore_mandatory = True
-			res_group_doc.insert()
+			res_group_doc.save()
 
 def insert_appointedd_resources(resources):
-	for resource in resources.get("data"):
-		services_names = frappe.db.get_all("Appointedd Service", 
-			filters={"appointedd_service_id": ["in", resource.get("services")]}, 
-			fields=["name as appointedd_service"])
-		resource_groups = frappe.db.get_all("Appointedd Resource Groups", 
-			filters={"appointedd_resource_group_id": ["in", resource.get("resource_group_ids")]}, 
-			fields=["name as appointedd_resource_group"])
+	try:
+		for resource in resources.get("data"):
+			services_names = frappe.db.get_all("Appointedd Service", 
+				filters={"appointedd_service_id": ["in", resource.get("services")]}, 
+				fields=["name as appointedd_service"])
+			resource_groups = frappe.db.get_all("Appointedd Resource Groups", 
+				filters={"appointedd_resource_group_id": ["in", resource.get("resource_group_ids")]}, 
+				fields=["name as appointedd_resource_group"])
 
-		if not frappe.db.exists('Appointedd Resource', resource.get("profile")["name"]):
-			resource_doc = frappe.new_doc('Appointedd Resource')
-			resource_doc.appointedd_resource = resource.get("profile")["name"]
-			resource_doc.appointedd_resource_id = resource.get("id")
-			resource_doc.email = resource.get("profile")["email"]
-			resource_doc.phone = resource.get("profile")["phone"]
-			resource_doc.house_no = resource.get("profile")["address"]["house_no"]
-			resource_doc.address_1 = resource.get("profile")["address"]["address_1"]
-			resource_doc.address_2 = resource.get("profile")["address"]["address_2"]
-			resource_doc.city = resource.get("profile")["address"]["city"]
-			resource_doc.postcode = resource.get("profile")["address"]["postcode"]
-			resource_doc.set("appointedd_resource_services", services_names)
-			resource_doc.set("appointedd_resource_groups_table", resource_groups)
-			resource_doc.flags.ignore_permissions = True
-			resource_doc.flags.ignore_mandatory = True
-			resource_doc.insert()
+			if not frappe.db.exists('Appointedd Resource', resource.get("profile")["name"]):
+				resource_doc = frappe.new_doc('Appointedd Resource')
+				resource_doc.appointedd_resource = resource.get("profile")["name"]
+				resource_doc.appointedd_resource_id = resource.get("id")
+				resource_doc.email = resource.get("profile")["email"]
+				resource_doc.phone = resource.get("profile")["phone"]
+				resource_doc.house_no = resource.get("profile")["address"]["house_no"]
+				resource_doc.address_1 = resource.get("profile")["address"]["address_1"]
+				resource_doc.address_2 = resource.get("profile")["address"]["address_2"]
+				resource_doc.city = resource.get("profile")["address"]["city"]
+				resource_doc.postcode = resource.get("profile")["address"]["postcode"]
+				resource_doc.set("appointedd_resource_services", services_names)
+				resource_doc.set("appointedd_resource_groups_table", resource_groups)
+				resource_doc.flags.ignore_permissions = True
+				resource_doc.flags.ignore_mandatory = True
+				resource_doc.save()
+
+	except Exception as error:
+		frappe.log_error("Insert Appointedd Resources Error", str(error))
 
 def insert_appointedd_bookings(bookings):
 	time_zone = frappe.defaults.get_defaults().get("time_zone")
@@ -196,7 +200,7 @@ def insert_appointedd_bookings(bookings):
 			resource_doc.party = customer.name if customer else None
 			resource_doc.flags.ignore_permissions = True
 			resource_doc.flags.ignore_mandatory = True
-			resource_doc.insert()
+			resource_doc.save()
 
 def get_customer_data(customers):
 	for customer in customers:
@@ -235,11 +239,11 @@ def create_customer(customer_data):
 	customer_doc.email_id = customer_data.get("data")["profile"]["email"]
 	customer_doc.flags.ignore_permissions = True
 	customer_doc.flags.ignore_mandatory = True
-	customer_doc.insert()
+	customer_doc.save()
 
 	return customer_doc
 
-@frappe.whitelist(allow_guest=False, methods=["POST"])
+@frappe.whitelist(allow_guest=False)
 def cancel_appointedd_booking(booking_id = None):
 	try:
 		api_key = get_appointedd_api_key()
