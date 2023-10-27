@@ -191,3 +191,8 @@ scheduler_events = {
 # auth_hooks = [
 #	"appointedd_integration.auth.validate"
 # ]
+
+fixtures = [
+    {"dt": "Custom Field", "filters": [["module", "=", "Appointedd Integration"]]},
+    {"dt": "Property Setter", "filters": [["module", "=", "Appointedd Integration"]]},
+]
